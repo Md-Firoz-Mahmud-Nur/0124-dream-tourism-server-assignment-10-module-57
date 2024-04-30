@@ -3,7 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000;
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
 //Middleware
 app.use(cors());
@@ -46,6 +46,13 @@ async function run() {
       const result = await touristSpotCollection
         .find({ userEmail: req.params.email })
         .toArray();
+      res.send(result);
+    });
+
+    app.delete("/myTouristSpot/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await touristSpotCollection.deleteOne(query);
       res.send(result);
     });
 
