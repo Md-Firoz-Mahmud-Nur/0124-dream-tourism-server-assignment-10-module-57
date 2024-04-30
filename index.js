@@ -35,6 +35,13 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/touristSpot/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await touristSpotCollection.findOne(query);
+      res.send(result);
+    });
+
     app.post("/touristSpot", async (req, res) => {
       const newTouristSpot = req.body;
       console.log(newTouristSpot);
