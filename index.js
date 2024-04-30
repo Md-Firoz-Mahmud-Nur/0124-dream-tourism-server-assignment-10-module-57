@@ -48,15 +48,15 @@ async function run() {
       const options = { upsert: true };
       const updateTouristSpot = {
         $set: {
-          spotName,
-          countryName,
-          imageUrl,
-          location,
-          averageCost,
-          seasonality,
-          travelTime,
-          totalVisitorsPerYear,
-          shortDescription,
+          spotName: req.body.spotName,
+          countryName: req.body.countryName,
+          imageUrl: req.body.imageUrl,
+          location: req.body.location,
+          averageCost: req.body.averageCost,
+          seasonality: req.body.seasonality,
+          travelTime: req.body.travelTime,
+          totalVisitorsPerYear: req.body.totalVisitorsPerYear,
+          shortDescription: req.body.shortDescription,
         },
       };
       const result = await touristSpotCollection.updateOne(
