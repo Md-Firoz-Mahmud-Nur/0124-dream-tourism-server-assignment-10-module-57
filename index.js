@@ -28,6 +28,7 @@ async function run() {
     // await client.connect();
     const touristSpotDatabase = client.db("tourDB");
     const touristSpotCollection = touristSpotDatabase.collection("touristSpot");
+    const countryCollection = touristSpotDatabase.collection("country");
 
     app.get("/touristSpot", async (req, res) => {
       const cursor = touristSpotCollection.find();
@@ -86,6 +87,12 @@ async function run() {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await touristSpotCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    app.get("/country", async (req, res) => {
+      const cursor = countryCollection.find();
+      const result = await cursor.toArray();
       res.send(result);
     });
 
